@@ -2,11 +2,10 @@
 
 ##################################################
 # triangular lattice large-N mean-field          #
-# local pipeline                                 #
+# local implementation                           #
 ##################################################
 
-# script parameters
-# data and logs in data
+# data in data
 # figures in figs
 
 # chain

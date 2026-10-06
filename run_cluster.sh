@@ -30,16 +30,15 @@
 
 ##################################################
 # triangular lattice large-N mean-field          #
-# cluster stages                                 #
+# cluster implementation                         #
 ##################################################
 
-# mode cluster in the script
-# mpi4py imports in the script
-# stage
-STAGE=solver
-#STAGE=large_S
-#STAGE=energy
-#STAGE=response
+# cluster mode 
+# computational target
+TARGET=solver
+#TARGET=large_S
+#TARGET=energy
+#TARGET=response
 
 ##module load CCEnv arch/avx512
 ##module load StdEnv
@@ -67,17 +66,17 @@ cp energy/cython/cython_en1ch*.so energy/
 # working directory data
 cd data
 
-if [ "$STAGE" = solver ]; then
+if [ "$TARGET" = solver ]; then
     mpiexec -n 768 python -m mpi4py.futures ../variation/var_torch.py
     cp "$(ls -t L_*_var1ch_data.npz | head -1)" var1ch_data.npz
 fi
-if [ "$STAGE" = large_S ]; then
+if [ "$TARGET" = large_S ]; then
     mpiexec -n 128 python -m mpi4py.futures ../variation/var_large_S.py
     cp "$(ls -t L_*_largeS_data.npz | head -1)" largeS_data.npz
 fi
-if [ "$STAGE" = energy ]; then
+if [ "$TARGET" = energy ]; then
     mpiexec -n 20 --bind-to none --map-by ppr:1:node python ../energy/en_cython.py
 fi
-if [ "$STAGE" = response ]; then
+if [ "$TARGET" = response ]; then
     mpiexec -n 576 python -m mpi4py.futures ../observables/make_strfc_torch.py
 fi
