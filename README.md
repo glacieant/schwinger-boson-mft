@@ -10,7 +10,7 @@ combined representation for the composite system becomes strongly
 interacting. In this computational project, a controlled perturbative
 expansion of this very scenario is investigated in the triangular
 lattice of arbitrary size. Our paper accompanying these calculations
-appeared in 2024 [4].  
+appeared in 2024 [3].  
 
 The python scripts are categorized according to their computational
 role and the computational entry-point is provided by "run.sh" for
